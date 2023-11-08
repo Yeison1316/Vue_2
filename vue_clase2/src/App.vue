@@ -23,6 +23,9 @@ let taskList = ref([
   }
   function setDone(index){
     taskList.value[index].done = !taskList.value[index].done
+    
+  }
+  function deleteTask(index){
     taskList.value.splice(index,1)
   }
 </script>
@@ -33,7 +36,7 @@ let taskList = ref([
     <h1>Lista de cosas</h1>
     <p class="subtitle">{{ newTask }}</p>
     <div>
-      <div v-for="(task, index) in taskList" :key="index" class="task" :class="{done:task.done}">{{ task.text}}<span class="button" @click="setDone(index)">x</span></div>
+      <div v-for="(task, index) in taskList" :key="index" class="task" :class="{done:task.done}">{{ task.text}}<span class="button" @dblclick="deleteTask(index)" @click="setDone(index)">x</span></div>
     </div>
     <div>
       <input v-model="newTask" @keypress.enter="addTask" type="text" placeholder="Escribe tu tarea">
